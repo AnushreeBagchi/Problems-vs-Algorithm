@@ -1,0 +1,11 @@
+1. 
+If the given number is n. Then the square root of that number will be between 1 and the number.
+Here I am taking the mid point of the start and the end point and checking if that square of the mid point is equal to the the input number.
+If square of mid is less than the number, then changing the starting point to mid+1
+else if mid is greater than the number then changing the end point to mid -1
+
+Time complexity : O(logn) --> make table
+Space complexity : O(1)
+
+2.
+
