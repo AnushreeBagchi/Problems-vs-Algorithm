@@ -7,5 +7,14 @@ else if mid is greater than the number then changing the end point to mid -1
 Time complexity : O(logn) --> make table
 Space complexity : O(1)
 
-2.
+5. Autocomplete with Trie:
+
+
+
+6. Max and Min in a Unsorted Array:
+here in order to get the min and max in O(n) time complexityb, I have taken 2 variables min and max. 
+I have loop through the entire arrray once comparing the array value with the min and max. If num is greater than max the replacing the value of max.
+If num is less than min then replacing value of min
+
+
 
