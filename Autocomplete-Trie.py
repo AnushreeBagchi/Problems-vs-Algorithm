@@ -3,18 +3,18 @@ class TrieNode:
         self.children = {}
         self.is_word = False
         self.result =  list()
+
     def insert(self, char):
         self.children[char] = TrieNode()
     
-    def suffixes(self, suffix=""):        
+    def suffixes(self, prefix, result):
         if self.children:
             for char, node in self.children.items():
                 if node.is_word:
-                    self.result.append(suffix+char)
-                node.suffixes(suffix+char)
-                
-                
+                    result.append(prefix+char)
 
+                node.suffixes( prefix+char , result)
+        return result                
 
 class Trie:
     def __init__(self):
@@ -37,18 +37,6 @@ class Trie:
             node = node.children[char]
         node.is_word = True
             
-    # def suffix(self, word=""):
-    #     node = self.root
-    #     for char in word:
-    #         if char not in node.children:
-    #             return -1
-    #         node = node.children[char]
-    #     if node.is_word:
-    #         return word
-    #     elif not node.children:
-    #         return
-    #     else:
-    #         self.suffix(word)
 
     def autocomplete(self, word):
         node = self.root
@@ -56,19 +44,27 @@ class Trie:
             if char not in node.children:
                 return -1
             node = node.children[char]
-        node.suffixes()
-        print(node.result)
-
+        result = node.suffixes(word, list())
+        return result
 
 trie = Trie()
 word_list = ['apple', 'bear', 'goo', 'good', 'goodbye', 'goods', 'goodwill', 'gooses'  ,'zebra']
-
 for word in word_list:
     trie.insert(word)
 
-test_words = ['bear', 'goo', 'good', 'goos']
-for word in test_words:
-    print(trie.search(word))
+# test_words = ['bear', 'goo', 'good', 'goos']
+# for word in test_words:
+#     print(trie.search(word))
 
-print(trie.autocomplete("ap"))
+# Tests
+
+print("Pass" if trie.autocomplete("ap")==['apple'] else "Fail")
+print("Pass" if trie.autocomplete("g")==['goo', 'gooses', 'good', 'goods', 'goodbye', 'goodwill'] else "Fail")
+# When prefix do not exist 
+print("Pass" if trie.autocomplete("s")==-1 else "Fail")
+# When prefix do not exist 
+print("Pass" if trie.autocomplete("dog")==-1 else "Fail")
+# Empty string edge case  
+print("Pass" if trie.autocomplete("")==['apple', 'bear', 'zebra', 'goo', 'gooses', 'good', 'goods', 'goodbye', 'goodwill'] else "Fail")
+
     
