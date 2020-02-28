@@ -8,13 +8,20 @@ Time complexity : O(logn) --> make table
 Space complexity : O(1)
 
 5. Autocomplete with Trie:
-
-
+Created a Trie to store set of words.
+Time complexity: For insert and search the time complexity will be O(n) where n represent the length of the word.
+Space complexity: For insert and search the space complexity will be O(n) where n is the number of nodes in the Trie.
 
 6. Max and Min in a Unsorted Array:
 here in order to get the min and max in O(n) time complexityb, I have taken 2 variables min and max. 
 I have loop through the entire arrray once comparing the array value with the min and max. If num is greater than max the replacing the value of max.
 If num is less than min then replacing value of min
+
+7. HttpRouter using Trie:
+Here the implementation is similar to autocomplete with Trie with each node representing path segment.
+Time complexity: For lookup and insert will be O(n) where n is length of path segments.
+Space complexity: For both lookup and insert it will be O(n) where n is length of path segment
+
 
 
 
