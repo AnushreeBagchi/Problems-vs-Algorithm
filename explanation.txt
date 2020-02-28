@@ -7,15 +7,34 @@ else if mid is greater than the number then changing the end point to mid -1
 Time complexity : O(logn) --> make table
 Space complexity : O(1)
 
+2.Search in a Rotated Sorted Array
+Here I have divided the array in half. If the left array is sorted then the searching in both the left and right arrays.
+If not sorted then calling the same function for the unsorted half.
+Time complexity: O(logn)
+Space complexity: O(n) 
+
+3. Rearrange Array Elements:
+Here I have sorted the array. Then constructing two numbers by picking the alternate numbers.
+Time complexity: MergeSort will take O(nlogn) and rearranging will take O(n). So total will be O(nlogn+n) => O(n(logn+1)). When eliminating the constant the time complexity will be O(nlogn)
+Space complexity: O(n) for space complexity.
+
+4. Dutch National Flag Problem:
+Implemented this using quick sort. Took a pivot index, if pivot value is 0 the moving it to the start of the array. 
+If pivot value is 2 then moving it to the end of the array.
+Time complexity: O(n) where n is the length of array.
+Space complexity: O(1). 
+
 5. Autocomplete with Trie:
 Created a Trie to store set of words.
 Time complexity: For insert and search the time complexity will be O(n) where n represent the length of the word.
 Space complexity: For insert and search the space complexity will be O(n) where n is the number of nodes in the Trie.
 
 6. Max and Min in a Unsorted Array:
-here in order to get the min and max in O(n) time complexityb, I have taken 2 variables min and max. 
+here in order to get the min and max in O(n) time complexity, I have taken 2 variables min and max. 
 I have loop through the entire arrray once comparing the array value with the min and max. If num is greater than max the replacing the value of max.
 If num is less than min then replacing value of min
+Time complexity: O(n) where n is the length of the array
+Space complexity: 0(1)
 
 7. HttpRouter using Trie:
 Here the implementation is similar to autocomplete with Trie with each node representing path segment.
