@@ -10,21 +10,14 @@ class Trie:
     def __init__(self, root_handler = None):
         self.root = TrieNode(root_handler)
     
-    def insert (self, path, handler):
+    def insert (self, path_arr, handler):
         curr_node = self.root
         for node in path_arr:
-            if node in curr_node.next:
-                curr_node = curr_node.next[node]
-                continue
-            curr_node.next[node] = TrieNode()
+            if node not in curr_node.next:
+                curr_node.next[node] = TrieNode()
+
+            curr_node = curr_node.next[node]
         curr_node.handler = handler            
-    
-    def split_path(self, path):
-        if path == "/":
-            return []
-        path_arr = path.split("/")
-        path_arr.remove("")
-        return path_arr
     
     def find(self, path_arr):
         if len(path_arr) == 0:
@@ -32,19 +25,40 @@ class Trie:
         curr_node = self.root
         for node in path_arr:
             if node not in curr_node.next:
-                return -1
+                return None
             curr_node = curr_node.next[node]
         return curr_node.handler
 
 class Router:
-    def __init__(self):
+    def __init__(self, root_handler, not_found_handler):
+        self.trie = Trie(root_handler)
+        self.not_found_handler = not_found_handler
+
+    def add_handler( self, path, handler):
+        path_arr = self.split_path(path)
+        self.trie.insert(path_arr, handler)
+    
+    def lookup(self, path):
+        path_arr = self.split_path(path)
+        node_handler = self.trie.find(path_arr)
+        if node_handler:
+            return node_handler
+        else:
+            return self.not_found_handler
+
+    def split_path(self, path):
+        if path == "/":
+            return []
+        path_arr = path.split("/")
+        path_arr.remove("")
+        return path_arr
         
+router = Router("root handler", "not found handler")
+router.add_handler("/home/about", "about handler")
 
-
-trie = Trie("root handler")
-trie.insertRoute("/abc/def/ghi", "handler1")
-trie.insertRoute("/abc/def/ghi/jkl", "handler2")
-
-print(trie.get_path_handler("/abc/def/ghi"))
-
+print("Pass" if router.lookup("/") == "root handler" else "Fail")
+print("Pass" if router.lookup("/home") == "not found handler" else "Fail")
+print("Pass" if router.lookup("/home/about") == "about handler" else "Fail")
+print("Pass" if router.lookup("/home/about/") == "not found handler" else "Fail") 
+print("Pass" if router.lookup("/home/about/me") == "not found handler" else "Fail") 
 
