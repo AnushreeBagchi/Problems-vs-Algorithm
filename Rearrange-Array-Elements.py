@@ -28,6 +28,8 @@ def rearrange(arr): #mergeSort
     return merge(left, right)
 
 def getMaxSum(arr):
+    if len(arr) < 1:
+        return -1
     arr = rearrange(arr)
     digit = len(arr)-1
     num1 = ""
@@ -39,6 +41,11 @@ def getMaxSum(arr):
             num2 += str(arr[digit])
         digit -= 1 
 
-    return (num1, num2)
+    return (int(num1), int(num2))
 
+print("Pass" if getMaxSum([3,4,2,1,5])==(531, 42) else "Fail")
+print("Pass" if getMaxSum([9,3,1,6,4])==(941, 63)else "Fail")
+
+print("Pass" if getMaxSum([])== -1 else "Fail")
+print("Pass" if getMaxSum([9,9,9,9,9])== (999, 99) else "Fail")
 
